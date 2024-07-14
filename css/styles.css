@@ -17,9 +17,9 @@ body {
   font-style: normal;
 }
 
-#default-img {
-  width: 400px;
-  height: 400px;
+.default-img {
+  width: 100%;
+  height: auto;
 }
 
 .box-label {
