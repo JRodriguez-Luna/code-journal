@@ -1,5 +1,5 @@
 header {
-  background-color: purple;
+  background-color: #4c2676;
   color: white;
 }
 
@@ -7,8 +7,9 @@ body {
   /* Primary Text Font for Body */
   font-family: Raleway, sans-serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
+  font-weight: normal;
   font-style: normal;
+  background-color: #eee;
 }
 
 textarea {
@@ -24,6 +25,7 @@ textarea {
 .default-img {
   width: 100%;
   height: auto;
+  border-radius: 5px;
 }
 
 .box-label {
@@ -37,13 +39,21 @@ textarea {
 .custom-text-input {
   width: 100%;
   height: auto;
-  padding-bottom: 10px;
+}
+
+.custom-text-input,
+textarea {
+  border: 1px solid #a2a2a3;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px;
 }
 
 .custom-button {
   padding: 5px;
   background-color: #4c2676;
   color: white;
+  border-radius: 4px;
 }
 
 .start-end {
