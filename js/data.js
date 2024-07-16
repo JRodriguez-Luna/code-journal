@@ -6,6 +6,7 @@ let data = {
     editing: null,
     nextEntryId: 1,
 };
+data = readData();
 // write data to localStorage
 function writeData() {
     const dataJSON = JSON.stringify(data);

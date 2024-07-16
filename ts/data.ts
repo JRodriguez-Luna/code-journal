@@ -7,6 +7,8 @@ let data = {
   nextEntryId: 1,
 };
 
+data = readData();
+
 // write data to localStorage
 function writeData(): void {
   const dataJSON = JSON.stringify(data);
