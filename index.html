@@ -29,88 +29,94 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet" />
   </head>
+
   <body>
     <header>
+      <!-- Title Page -->
       <div class="container">
         <div class="row">
           <div class="column-full column-half">
-            <h1 class="heading-font">Code Journal</h1>
+            <h1>Code Journal</h1>
           </div>
         </div>
       </div>
     </header>
     <main class="container">
       <div data-view="entry-form">
-        <!-- Title -->
-        <div class="row">
-          <div class="column-full column-half">
-            <h1 class="heading-font">New Entry</h1>
+        <!-- create the HTML for the form that creates a journal entry -->
+        <form action="">
+          <!-- Head Title -->
+          <div class="row">
+            <div class="column-full column-half">
+              <h1 class="header-font">New Entry</h1>
+            </div>
           </div>
-        </div>
-        <!-- Default Img and Entries-->
-        <div class="row">
-          <div class="column-full column-half">
-            <img
-              class="default-img"
-              src="./images/placeholder-image-square.jpg"
-              alt="default_img"
-              id="placeholder-img" />
-          </div>
-          <!-- Form -->
-          <div class="column-full column-half">
-            <form action="">
-              <div class="box-label">
-                <div class="custom-label">
-                  <label for="title">Title</label>
-                </div>
-                <div>
-                  <input
-                    class="custom-text-input"
-                    type="text"
-                    name="title"
-                    id="title"
-                    required />
-                </div>
+
+          <!-- Default Img Placeholder -->
+          <div class="row">
+            <!-- Img Section -->
+            <div class="column-full column-half">
+              <img
+                class="default-img"
+                src="./images/placeholder-image-square.jpg"
+                alt="default-img" />
+            </div>
+
+            <!-- Title & Photo Input -->
+            <div class="column-full column-half">
+              <!-- Title -->
+              <div class="custom-label">
+                <label class="" for="title">Title</label>
               </div>
+              <div>
+                <input
+                  class="custom-input"
+                  type="text"
+                  name="title"
+                  id="title" />
+              </div>
+
+              <!-- Photo URL -->
               <div class="custom-label">
                 <label for="photo-url">Photo URL</label>
               </div>
               <div>
                 <input
-                  class="custom-text-input"
+                  class="custom-input"
                   type="text"
                   name="photo-url"
-                  id="photo-url"
-                  required />
+                  id="photo-url" />
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="column-full column-half">
-            <form action="">
+
+          <!-- Notes Input -->
+          <div class="row">
+            <div class="column-full column-half">
+              <div class="custom-label">
+                <label for="Notes">Notes</label>
+              </div>
               <div>
-                <div class="custom-label">
-                  <label for="notes">Notes</label>
-                </div>
-                <div>
-                  <textarea
-                    name="notes"
-                    id="notes"
-                    cols="110"
-                    rows="15"
-                    required></textarea>
-                </div>
+                <textarea
+                  name="Notes"
+                  id="Notes"
+                  cols="110"
+                  rows="15"></textarea>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-        <!-- Save Button -->
-        <div class="row">
-          <div class="column-full column-half start-end">
-            <button class="custom-button">SAVE</button>
+
+          <!-- Save Button -->
+          <div class="row">
+            <div class="column-full column-half">
+              <div class="button-container">
+                <button type="submit" class="custom-button" id="save-button">
+                  SAVE
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
       <div data-view="entries" class="hidden"></div>
     </main>
