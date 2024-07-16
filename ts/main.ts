@@ -37,7 +37,8 @@ $entryForm.addEventListener('submit', (event: Event) => {
   data.nextEntryId++;
 
   // adds to the beginning of entries array
-  (data.entries as any[]).unshift(entryData);
+  (data.entries as unknown[]).unshift(entryData);
+  console.log(data.entries);
 
   // reset preview img
   $previewImg.src = './images/placeholder-image-square.jpg';
