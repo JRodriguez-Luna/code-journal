@@ -59,7 +59,8 @@
               <img
                 class="default-img"
                 src="./images/placeholder-image-square.jpg"
-                alt="default-img" />
+                alt="default-img"
+                id="placeholder-img" />
             </div>
 
             <!-- Title & Photo Input -->
@@ -73,19 +74,21 @@
                   class="custom-input"
                   type="text"
                   name="title"
-                  id="title" />
+                  id="title"
+                  required />
               </div>
 
               <!-- Photo URL -->
               <div class="custom-label">
-                <label for="photo-url">Photo URL</label>
+                <label for="photoUrl">Photo URL</label>
               </div>
               <div>
                 <input
                   class="custom-input"
                   type="text"
-                  name="photo-url"
-                  id="photo-url" />
+                  name="photoUrl"
+                  id="photoUrl"
+                  required />
               </div>
             </div>
           </div>
@@ -94,14 +97,15 @@
           <div class="row">
             <div class="column-full column-half">
               <div class="custom-label">
-                <label for="Notes">Notes</label>
+                <label for="notes">Notes</label>
               </div>
               <div>
                 <textarea
-                  name="Notes"
-                  id="Notes"
+                  name="notes"
+                  id="notes"
                   cols="110"
-                  rows="15"></textarea>
+                  rows="15"
+                  required></textarea>
               </div>
             </div>
           </div>
