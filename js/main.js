@@ -18,6 +18,14 @@ $entryForm.addEventListener('submit', (event) => {
     title: $entryElements.title.value,
     photoUrl: $entryElements.photoUrl.value,
     notes: $entryElements.notes.value,
+    // Assign property to new Object taken from nextEntryId
+    entryId: data.nextEntryId,
   };
-  data.entries.push(entryData);
+  // next entry will receive a different entryId.
+  data.nextEntryId++;
+  // adds to the beginning of entries array
+  data.entries.unshift(entryData);
+  // reset preview img
+  $previewImg.src = './images/placeholder-image-square.jpg';
+  $entryForm.reset(); // reset form
 });
