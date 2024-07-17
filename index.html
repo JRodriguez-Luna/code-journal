@@ -35,7 +35,7 @@
       <!-- Title Page -->
       <div class="container">
         <div class="row">
-          <div class="column-full column-half">
+          <div class="column-full">
             <h1>Code Journal</h1>
           </div>
         </div>
@@ -44,10 +44,10 @@
     <main class="container">
       <div data-view="entry-form">
         <!-- create the HTML for the form that creates a journal entry -->
-        <form action="">
+        <form id="entry-form" action="">
           <!-- Head Title -->
           <div class="row">
-            <div class="column-full column-half">
+            <div class="column-full">
               <h1 class="header-font">New Entry</h1>
             </div>
           </div>
@@ -67,7 +67,7 @@
             <div class="column-full column-half">
               <!-- Title -->
               <div class="custom-label">
-                <label class="" for="title">Title</label>
+                <label for="title">Title</label>
               </div>
               <div>
                 <input
@@ -85,7 +85,7 @@
               <div>
                 <input
                   class="custom-input"
-                  type="text"
+                  type="url"
                   name="photoUrl"
                   id="photoUrl"
                   required />
@@ -95,7 +95,7 @@
 
           <!-- Notes Input -->
           <div class="row">
-            <div class="column-full column-half">
+            <div class="column-full">
               <div class="custom-label">
                 <label for="notes">Notes</label>
               </div>
@@ -112,7 +112,7 @@
 
           <!-- Save Button -->
           <div class="row">
-            <div class="column-full column-half">
+            <div class="column-full">
               <div class="button-container">
                 <button type="submit" class="custom-button" id="save-button">
                   SAVE

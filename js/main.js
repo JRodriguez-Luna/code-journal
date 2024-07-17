@@ -1,7 +1,8 @@
 "use strict";
-const $entryForm = document.querySelector('form');
+const $entryForm = document.querySelector('#entry-form');
 const $photoUrl = document.querySelector('#photoUrl');
 const $previewImg = document.querySelector('#placeholder-img');
+const placeholderImg = $previewImg.src;
 if (!$entryForm)
     throw new Error('$entryForm did not query!');
 if (!$photoUrl)
@@ -11,7 +12,10 @@ if (!$previewImg)
 // set the src attribute of the photo from user input
 $photoUrl.addEventListener('input', (event) => {
     const url = event.target;
-    $previewImg.src = url.value;
+    if (!url.checkValidity())
+        $previewImg.src = placeholderImg;
+    else
+        $previewImg.src = url.value;
 });
 $entryForm.addEventListener('submit', (event) => {
     event.preventDefault(); // prevent page from refreshing
@@ -30,6 +34,6 @@ $entryForm.addEventListener('submit', (event) => {
     data.entries.unshift(entryData);
     writeData();
     // reset preview img
-    $previewImg.src = './images/placeholder-image-square.jpg';
+    $previewImg.src = placeholderImg;
     $entryForm.reset(); // reset form
 });

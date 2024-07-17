@@ -5,11 +5,19 @@ interface EntryForm extends HTMLFormControlsCollection {
   notes: HTMLTextAreaElement;
 }
 
-const $entryForm = document.querySelector('form') as HTMLFormElement;
+interface Entry {
+  title: string;
+  photoUrl: string;
+  notes: string;
+  entryId: number;
+}
+
+const $entryForm = document.querySelector('#entry-form') as HTMLFormElement;
 const $photoUrl = document.querySelector('#photoUrl') as HTMLInputElement;
 const $previewImg = document.querySelector(
   '#placeholder-img',
 ) as HTMLImageElement;
+const placeholderImg = $previewImg.src;
 
 if (!$entryForm) throw new Error('$entryForm did not query!');
 if (!$photoUrl) throw new Error('$photoUrl did not query!');
@@ -18,7 +26,8 @@ if (!$previewImg) throw new Error('$previewImg did not query!');
 // set the src attribute of the photo from user input
 $photoUrl.addEventListener('input', (event: Event) => {
   const url = event.target as HTMLInputElement;
-  $previewImg.src = url.value;
+  if (!url.checkValidity()) $previewImg.src = placeholderImg;
+  else $previewImg.src = url.value;
 });
 
 $entryForm.addEventListener('submit', (event: Event) => {
@@ -26,7 +35,7 @@ $entryForm.addEventListener('submit', (event: Event) => {
   const $entryElements = $entryForm.elements as EntryForm;
 
   // stores the form's input values in a new object
-  const entryData = {
+  const entryData: Entry = {
     title: $entryElements.title.value,
     photoUrl: $entryElements.photoUrl.value,
     notes: $entryElements.notes.value,
@@ -37,10 +46,10 @@ $entryForm.addEventListener('submit', (event: Event) => {
   data.nextEntryId++;
 
   // adds to the beginning of entries array
-  (data.entries as unknown[]).unshift(entryData);
+  data.entries.unshift(entryData);
   writeData();
 
   // reset preview img
-  $previewImg.src = './images/placeholder-image-square.jpg';
+  $previewImg.src = placeholderImg;
   $entryForm.reset(); // reset form
 });
