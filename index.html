@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,13 +14,114 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
+    <!-- Google Font Pair -->
+    <!-- Poppins Font - Header -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet" />
+
+    <!-- Raleway Font - Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
   </head>
+
   <body>
     <header>
-      <div class="container"></div>
+      <!-- Title Page -->
+      <div class="container">
+        <div class="row">
+          <div class="column-full">
+            <h1>Code Journal</h1>
+          </div>
+        </div>
+      </div>
     </header>
     <main class="container">
-      <div data-view="entry-form"></div>
+      <div data-view="entry-form">
+        <!-- create the HTML for the form that creates a journal entry -->
+        <form id="entry-form" action="">
+          <!-- Head Title -->
+          <div class="row">
+            <div class="column-full">
+              <h1 class="header-font">New Entry</h1>
+            </div>
+          </div>
+
+          <!-- Default Img Placeholder -->
+          <div class="row">
+            <!-- Img Section -->
+            <div class="column-full column-half">
+              <img
+                class="default-img"
+                src="./images/placeholder-image-square.jpg"
+                alt="default-img"
+                id="placeholder-img" />
+            </div>
+
+            <!-- Title & Photo Input -->
+            <div class="column-full column-half">
+              <!-- Title -->
+              <div class="custom-label">
+                <label for="title">Title</label>
+              </div>
+              <div>
+                <input
+                  class="custom-input"
+                  type="text"
+                  name="title"
+                  id="title"
+                  required />
+              </div>
+
+              <!-- Photo URL -->
+              <div class="custom-label">
+                <label for="photoUrl">Photo URL</label>
+              </div>
+              <div>
+                <input
+                  class="custom-input"
+                  type="url"
+                  name="photoUrl"
+                  id="photoUrl"
+                  required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes Input -->
+          <div class="row">
+            <div class="column-full">
+              <div class="custom-label">
+                <label for="notes">Notes</label>
+              </div>
+              <div>
+                <textarea
+                  name="notes"
+                  id="notes"
+                  cols="110"
+                  rows="15"
+                  required></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Save Button -->
+          <div class="row">
+            <div class="column-full">
+              <div class="button-container">
+                <button type="submit" class="custom-button" id="save-button">
+                  SAVE
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
       <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>

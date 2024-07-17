@@ -1,0 +1,54 @@
+header {
+  background-color: #4c2676;
+  color: white;
+}
+
+body {
+  /* Primary Text Font for Body */
+  font-family: Raleway, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #eee;
+}
+
+.header-font {
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.default-img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.custom-input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.custom-label {
+  margin: 10px 0;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 15px;
+}
+
+.custom-button {
+  padding: 10px 20px;
+  background-color: #4c2676;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
