@@ -12,16 +12,16 @@ body {
   background-color: #eee;
 }
 
+img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
 .header-font {
   font-family: Poppins, sans-serif;
   font-weight: 500;
   font-style: normal;
-}
-
-.default-img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
 }
 
 .custom-input,
@@ -38,7 +38,6 @@ textarea {
 }
 
 .button-container {
-  width: 100%;
   display: flex;
   justify-content: end;
   margin-bottom: 15px;
