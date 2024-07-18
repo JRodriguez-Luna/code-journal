@@ -37,3 +37,27 @@ $entryForm.addEventListener('submit', (event) => {
     $previewImg.src = placeholderImg;
     $entryForm.reset(); // reset form
 });
+function renderEntry(entry) {
+    const $li = document.createElement('li');
+    const $row = document.createElement('div');
+    const $columnImg = document.createElement('div');
+    const $columnText = document.createElement('div');
+    const $img = document.createElement('img');
+    const $heading = document.createElement('h2');
+    const $description = document.createElement('p');
+    $row.setAttribute('class', 'row');
+    $columnImg.setAttribute('class', 'column-half');
+    $columnText.setAttribute('class', 'column-half');
+    $heading.setAttribute('class', 'header-font');
+    // Single entry
+    $img.src =
+        'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/74/2024/02/14/20240214_090822-874546774.jpg';
+    $img.alt = 'mashle_anime';
+    $heading.textContent = 'Text Title Test';
+    $description.textContent = 'Description Test here';
+    $columnImg.appendChild($img);
+    $columnText.append($heading, $description);
+    $row.append($columnImg, $columnText);
+    $li.appendChild($row);
+    return $li;
+}
