@@ -18,6 +18,11 @@ img {
   border-radius: 5px;
 }
 
+.no-entries-text {
+  display: flex;
+  justify-content: center;
+}
+
 .header-font {
   font-family: Poppins, sans-serif;
   font-weight: 500;
