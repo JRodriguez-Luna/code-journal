@@ -54,7 +54,7 @@ $entryForm.addEventListener('submit', (event: Event) => {
   $entryForm.reset(); // reset form
 });
 
-function renderEntry(entry: Entry[]): HTMLLIElement {
+function renderEntry(entry: Entry): HTMLLIElement {
   const $li = document.createElement('li');
   const $row = document.createElement('div');
   const $columnImg = document.createElement('div');
@@ -68,12 +68,11 @@ function renderEntry(entry: Entry[]): HTMLLIElement {
   $columnText.setAttribute('class', 'column-half');
   $heading.setAttribute('class', 'header-font');
 
-  // Single entry
-  $img.src =
-    'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/74/2024/02/14/20240214_090822-874546774.jpg';
-  $img.alt = 'mashle_anime';
-  $heading.textContent = 'Text Title Test';
-  $description.textContent = 'Description Test here';
+  // entry data
+  $img.src = entry.photoUrl;
+  $img.alt = entry.title;
+  $heading.textContent = entry.title;
+  $description.textContent = entry.notes;
 
   $columnImg.appendChild($img);
   $columnText.append($heading, $description);
@@ -83,3 +82,14 @@ function renderEntry(entry: Entry[]): HTMLLIElement {
   return $li;
 }
 
+//  load entries onto webpage
+document.addEventListener('DOMContentLoaded', () => {
+  const $ul = document.querySelector('#journal-entry');
+  if (!$ul) throw new Error('$ul did not query!');
+
+  // loop through the data.entries array
+  for (let i = 0; i < data.entries.length; i++) {
+    const $newListItem = renderEntry(data.entries[i]);
+    $ul.appendChild($newListItem);
+  }
+});
