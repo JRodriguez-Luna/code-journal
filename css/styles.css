@@ -74,3 +74,13 @@ textarea {
 li {
   list-style-type: none;
 }
+
+.entries-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.new-entry-button {
+  text-decoration: none;
+}
