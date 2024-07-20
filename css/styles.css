@@ -18,6 +18,20 @@ img {
   border-radius: 5px;
 }
 
+/* Nav Bar */
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 0 10px;
+}
+
 .no-entries-text {
   display: flex;
   justify-content: center;

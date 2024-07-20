@@ -19,6 +19,7 @@ const $previewImg = document.querySelector(
   '#placeholder-img',
 ) as HTMLImageElement;
 const $journalEntry = document.querySelector('#journal-entry');
+const $navItem = document.querySelector('.nav-item');
 const placeholderImg = $previewImg.src;
 
 if (!$entryForm) throw new Error('$entryForm did not query!');
@@ -26,6 +27,7 @@ if (!$photoUrl) throw new Error('$photoUrl did not query!');
 if (!$previewImg) throw new Error('$previewImg did not query!');
 if (!$journalEntry) throw new Error('$journalEntry did not query!');
 if (!$entriesView) throw new Error('$entriesView did not query!');
+if (!$navItem) throw new Error('$navItem did not query!');
 
 // set the src attribute of the photo from user input
 $photoUrl.addEventListener('input', (event: Event) => {
@@ -104,6 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   viewSwap(data.view);
   toggleNoEntries();
+});
+
+//  Swap proper tab view
+$navItem.addEventListener('click', (event: Event) => {
+  const $eventTarget = event.target as HTMLElement;
+  const viewName = $eventTarget.dataset.view;
+  if (viewName === 'entries' || viewName === 'entry-form') viewSwap(viewName);
 });
 
 // toggles the no entries text to show or hide when the function is called
