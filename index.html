@@ -35,8 +35,11 @@
       <!-- Title Page -->
       <div class="container">
         <div class="row">
-          <div class="column-full">
+          <div class="column-half navbar">
             <h1>Code Journal</h1>
+            <a href="#" data-view="entries" class="nav-item header-font"
+              >Entries</a
+            >
           </div>
         </div>
       </div>
@@ -47,7 +50,7 @@
         <form id="entry-form" action="">
           <!-- Head Title -->
           <div class="row">
-            <div class="column-full">
+            <div class="column-half">
               <h1 class="header-font">New Entry</h1>
             </div>
           </div>
@@ -55,41 +58,36 @@
           <!-- Default Img Placeholder -->
           <div class="row">
             <!-- Img Section -->
-            <div class="column-full column-half">
+            <div class="column-half">
               <img
-                class="default-img"
                 src="./images/placeholder-image-square.jpg"
                 alt="default-img"
                 id="placeholder-img" />
             </div>
 
             <!-- Title & Photo Input -->
-            <div class="column-full column-half">
+            <div class="column-half">
               <!-- Title -->
               <div class="custom-label">
                 <label for="title">Title</label>
               </div>
-              <div>
-                <input
-                  class="custom-input"
-                  type="text"
-                  name="title"
-                  id="title"
-                  required />
-              </div>
+              <input
+                class="custom-input"
+                type="text"
+                name="title"
+                id="title"
+                required />
 
               <!-- Photo URL -->
               <div class="custom-label">
                 <label for="photoUrl">Photo URL</label>
               </div>
-              <div>
-                <input
-                  class="custom-input"
-                  type="url"
-                  name="photoUrl"
-                  id="photoUrl"
-                  required />
-              </div>
+              <input
+                class="custom-input"
+                type="url"
+                name="photoUrl"
+                id="photoUrl"
+                required />
             </div>
           </div>
 
@@ -99,30 +97,41 @@
               <div class="custom-label">
                 <label for="notes">Notes</label>
               </div>
-              <div>
-                <textarea
-                  name="notes"
-                  id="notes"
-                  cols="110"
-                  rows="15"
-                  required></textarea>
-              </div>
+              <textarea
+                name="notes"
+                id="notes"
+                cols="110"
+                rows="15"
+                required></textarea>
             </div>
           </div>
 
           <!-- Save Button -->
           <div class="row">
-            <div class="column-full">
-              <div class="button-container">
-                <button type="submit" class="custom-button" id="save-button">
-                  SAVE
-                </button>
-              </div>
+            <div class="column-full button-container">
+              <button type="submit" class="custom-button" id="save-button">
+                SAVE
+              </button>
             </div>
           </div>
         </form>
       </div>
-      <div data-view="entries" class="hidden"></div>
+      <div data-view="entries" class="entries-wrap hidden">
+        <!-- Entries Tab -->
+        <div class="row">
+          <div class="column-full entries-heading">
+            <h1 class="header-font">Entry</h1>
+            <a
+              href="#"
+              class="new-entry-button custom-button"
+              data-view="entry-form"
+              >NEW</a
+            >
+          </div>
+        </div>
+        <p class="no-entries-text">No entries are submitted yet!</p>
+        <ul id="journal-entry"></ul>
+      </div>
     </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
