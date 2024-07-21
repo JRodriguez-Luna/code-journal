@@ -20,6 +20,7 @@ const $previewImg = document.querySelector(
 ) as HTMLImageElement;
 const $journalEntry = document.querySelector('#journal-entry');
 const $navItem = document.querySelector('.nav-item');
+const $newEntryButton = document.querySelector('.new-entry-button');
 const placeholderImg = $previewImg.src;
 
 if (!$entryForm) throw new Error('$entryForm did not query!');
@@ -28,6 +29,7 @@ if (!$previewImg) throw new Error('$previewImg did not query!');
 if (!$journalEntry) throw new Error('$journalEntry did not query!');
 if (!$entriesView) throw new Error('$entriesView did not query!');
 if (!$navItem) throw new Error('$navItem did not query!');
+if (!$newEntryButton) throw new Error('$newEntryButton did not query!');
 
 // set the src attribute of the photo from user input
 $photoUrl.addEventListener('input', (event: Event) => {
@@ -58,12 +60,11 @@ $entryForm.addEventListener('submit', (event: Event) => {
   viewSwap('entries');
 
   // Add new entry to the DOM
-  const $li = renderEntry(entryData);
-  $journalEntry.prepend($li);
+  $journalEntry.prepend(renderEntry(entryData));
 
   // reset preview img
   $previewImg.src = placeholderImg;
-  $entryForm.reset(); // reset form
+  resetForm(); // reset form
 });
 
 function renderEntry(entry: Entry): HTMLLIElement {
@@ -115,6 +116,15 @@ $navItem.addEventListener('click', (event: Event) => {
   if (viewName === 'entries' || viewName === 'entry-form') viewSwap(viewName);
 });
 
+// when clicking on new, swaps to entry form
+$newEntryButton.addEventListener('click', (event: Event) => {
+  const $viewName = (event.target as HTMLElement).dataset.view;
+  if ($viewName === 'entries' || $viewName === 'entry-form') {
+    resetForm();
+    viewSwap($viewName);
+  }
+});
+
 // toggles the no entries text to show or hide when the function is called
 const toggleNoEntries = (): void => {
   const $noEntryText = document.querySelector('.no-entries-text');
@@ -134,4 +144,9 @@ const viewSwap = (viewName: 'entries' | 'entry-form'): void => {
   }
 
   data.view = viewName;
+};
+
+// Reset form
+const resetForm = (): void => {
+  $entryForm.reset();
 };
