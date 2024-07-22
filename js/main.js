@@ -52,15 +52,20 @@ function renderEntry(entry) {
   const $img = document.createElement('img');
   const $entryTitle = document.createElement('h2');
   const $description = document.createElement('p');
+  // pencil icon
+  const $pencilIcon = document.createElement('i');
   $row.setAttribute('class', 'row');
   $columnImg.setAttribute('class', 'column-half');
   $columnText.setAttribute('class', 'column-half');
   $entryTitle.setAttribute('class', 'header-font');
+  // pencil attribute
+  $pencilIcon.setAttribute('class', 'fa-solid fa-pencil');
   // entry data
   $img.src = entry.photoUrl;
   $img.alt = entry.title;
   $entryTitle.textContent = entry.title;
   $description.textContent = entry.notes;
+  $entryTitle.appendChild($pencilIcon);
   $columnImg.appendChild($img);
   $columnText.append($entryTitle, $description);
   $row.append($columnImg, $columnText);
