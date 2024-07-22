@@ -18,6 +18,9 @@ const $entriesView = document.querySelector('.entries-wrap');
 const $previewImg = document.querySelector(
   '#placeholder-img',
 ) as HTMLImageElement;
+const $titleInput = document.querySelector('#title') as HTMLInputElement;
+const $notesInput = document.querySelector('#notes') as HTMLInputElement;
+const $mainHeading = document.querySelector('#new-entry');
 const $journalEntry = document.querySelector('#journal-entry');
 const $navItem = document.querySelector('.nav-item');
 const $newEntryButton = document.querySelector('.new-entry-button');
@@ -30,6 +33,9 @@ if (!$journalEntry) throw new Error('$journalEntry did not query!');
 if (!$entriesView) throw new Error('$entriesView did not query!');
 if (!$navItem) throw new Error('$navItem did not query!');
 if (!$newEntryButton) throw new Error('$newEntryButton did not query!');
+if (!$titleInput) throw new Error('$titleInput did not query!');
+if (!$notesInput) throw new Error('$notesInput did not query!');
+if (!$mainHeading) throw new Error('$mainHeading did not query!');
 
 // set the src attribute of the photo from user input
 $photoUrl.addEventListener('input', (event: Event) => {
@@ -130,6 +136,31 @@ $newEntryButton.addEventListener('click', (event: Event) => {
     resetForm();
     viewSwap($viewName);
   }
+});
+
+// when the pencil icon is clicked
+$journalEntry.addEventListener('click', (event: Event) => {
+  const $icon = event.target as HTMLElement;
+
+  // if not found, return
+  if (!$icon.classList.contains('fa-pencil')) return;
+
+  // get the li closes and store the value
+  const $parent = $icon.closest('li');
+  const $entryId = $parent?.getAttribute('data-entry-id');
+
+  // search for and store that obj using the entryId to verify
+  data.entries.forEach((entry) => {
+    if (entry.entryId.toString() === $entryId) {
+      const dataEdit = (data.editing = entry);
+      $previewImg.src = dataEdit.photoUrl;
+      $photoUrl.value = dataEdit.photoUrl;
+      $titleInput.value = dataEdit.title;
+      $notesInput.value = dataEdit.notes;
+      $mainHeading.textContent = 'Edit Entry';
+      viewSwap('entry-form'); // Swaps to 'Edit Entry'
+    }
+  });
 });
 
 // toggles the no entries text to show or hide when the function is called
