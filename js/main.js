@@ -60,6 +60,8 @@ function renderEntry(entry) {
   $entryTitle.setAttribute('class', 'header-font');
   // pencil attribute
   $pencilIcon.setAttribute('class', 'fa-solid fa-pencil');
+  // li that stores the entryId of the entry being rendered
+  $li.setAttribute('data-entry-id', entry.entryId.toString());
   // entry data
   $img.src = entry.photoUrl;
   $img.alt = entry.title;
