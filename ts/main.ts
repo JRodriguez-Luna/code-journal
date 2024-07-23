@@ -21,7 +21,7 @@ const $previewImg = document.querySelector(
 const $titleInput = document.querySelector('#title') as HTMLInputElement;
 const $notesInput = document.querySelector('#notes') as HTMLInputElement;
 const $mainHeading = document.querySelector('#new-entry');
-const $titleForm = document.querySelector('#title');
+const $titleForm = document.querySelector('#new-entry');
 const $journalEntry = document.querySelector('#journal-entry');
 const $navItem = document.querySelector('.nav-item');
 const $newEntryButton = document.querySelector('.new-entry-button');
@@ -159,6 +159,7 @@ $navItem.addEventListener('click', (event: Event) => {
 // when clicking on new, swaps to entry form
 $newEntryButton.addEventListener('click', (event: Event) => {
   const $viewName = (event.target as HTMLElement).dataset.view;
+  $titleForm.textContent = 'New Entry';
   if ($viewName === 'entries' || $viewName === 'entry-form') {
     resetForm();
     viewSwap($viewName);
