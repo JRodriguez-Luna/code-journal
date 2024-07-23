@@ -6,6 +6,7 @@ const $previewImg = document.querySelector('#placeholder-img');
 const $titleInput = document.querySelector('#title');
 const $notesInput = document.querySelector('#notes');
 const $mainHeading = document.querySelector('#new-entry');
+const $titleForm = document.querySelector('#title');
 const $journalEntry = document.querySelector('#journal-entry');
 const $navItem = document.querySelector('.nav-item');
 const $newEntryButton = document.querySelector('.new-entry-button');
@@ -20,6 +21,7 @@ if (!$newEntryButton) throw new Error('$newEntryButton did not query!');
 if (!$titleInput) throw new Error('$titleInput did not query!');
 if (!$notesInput) throw new Error('$notesInput did not query!');
 if (!$mainHeading) throw new Error('$mainHeading did not query!');
+if (!$titleForm) throw new Error('$titleForm did not query!');
 // set the src attribute of the photo from user input
 $photoUrl.addEventListener('input', (event) => {
   const url = event.target;
@@ -37,17 +39,37 @@ $entryForm.addEventListener('submit', (event) => {
     // Assign property to new Object taken from nextEntryId
     entryId: data.nextEntryId,
   };
-  // next entry will receive a different entryId.
-  data.nextEntryId++;
-  // adds to the beginning of entries array
-  data.entries.unshift(entryData);
+  if (data.editing) {
+    //  assign the entry id value from data.editing to the new object with the updated form values.
+    entryData.entryId = data.editing.entryId;
+    //  find the index located in the array
+    const index = data.entries.findIndex(
+      (entry) => entry.entryId === data.editing?.entryId,
+    );
+    // replace the original object for the edited entry
+    data.entries[index] = entryData;
+    // render new DOM Tree and replace original 'li' with the updated
+    const $oldListItem = $journalEntry.querySelector(
+      `[data-entry-id='${data.editing.entryId}']`,
+    );
+    if (!$oldListItem) throw new Error('$oldListItem did not query!');
+    // replaces old li with newly rendered
+    $oldListItem.replaceWith(renderEntry(entryData));
+    //  update the title on the form to New Entry.
+    //  reset data.editing to null.
+    data.editing = null;
+    $titleForm.textContent = 'New Entry';
+  } else {
+    // next entry will receive a different entryId.
+    data.nextEntryId++;
+    // adds to the beginning of entries array
+    data.entries.unshift(entryData);
+    // Add new entry to the DOM
+    $journalEntry.prepend(renderEntry(entryData));
+  }
   writeData();
   toggleNoEntries();
   viewSwap('entries');
-  // Add new entry to the DOM
-  $journalEntry.prepend(renderEntry(entryData));
-  // reset preview img
-  $previewImg.src = placeholderImg;
   resetForm(); // reset form
 });
 function renderEntry(entry) {
@@ -112,19 +134,24 @@ $journalEntry.addEventListener('click', (event) => {
   if (!$icon.classList.contains('fa-pencil')) return;
   // get the li closes and store the value
   const $parent = $icon.closest('li');
-  const $entryId = $parent?.getAttribute('data-entry-id');
+  if (!$parent) throw new Error('$entryForm closest() failed!');
+  const $entryId = $parent.getAttribute('data-entry-id');
+  if (!$entryId) throw new Error('$entryForm getAttribute() failed!');
   // search for and store that obj using the entryId to verify
-  data.entries.forEach((entry) => {
-    if (entry.entryId.toString() === $entryId) {
-      const dataEdit = (data.editing = entry);
-      $previewImg.src = dataEdit.photoUrl;
-      $photoUrl.value = dataEdit.photoUrl;
-      $titleInput.value = dataEdit.title;
-      $notesInput.value = dataEdit.notes;
-      $mainHeading.textContent = 'Edit Entry';
-      viewSwap('entry-form'); // Swaps to 'Edit Entry'
-    }
-  });
+  const entry = data.entries.find(
+    (entry) => entry.entryId.toString() === $entryId,
+  );
+  if (!entry) throw new Error('data.entries find() failed!');
+  // if found, assign entry to data.editing
+  data.editing = entry;
+  // pre-populate form with entry's values
+  $previewImg.src = entry.photoUrl;
+  $photoUrl.value = entry.photoUrl;
+  $titleInput.value = entry.title;
+  $notesInput.value = entry.notes;
+  // change title
+  $titleForm.textContent = 'Edit Entry';
+  viewSwap('entry-form');
 });
 // toggles the no entries text to show or hide when the function is called
 const toggleNoEntries = () => {
@@ -145,5 +172,6 @@ const viewSwap = (viewName) => {
 };
 // Reset form
 const resetForm = () => {
+  $previewImg.src = placeholderImg;
   $entryForm.reset();
 };
