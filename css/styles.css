@@ -18,6 +18,14 @@ img {
   border-radius: 5px;
 }
 
+li {
+  list-style-type: none;
+}
+
+i {
+  cursor: pointer;
+}
+
 /* Nav Bar */
 .navbar {
   display: flex;
@@ -41,6 +49,8 @@ img {
   font-family: Poppins, sans-serif;
   font-weight: 500;
   font-style: normal;
+  display: flex;
+  justify-content: space-between;
 }
 
 .custom-input,
@@ -69,10 +79,6 @@ textarea {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-li {
-  list-style-type: none;
 }
 
 .entries-heading {

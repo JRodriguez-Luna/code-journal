@@ -3,6 +3,10 @@ const $entryForm = document.querySelector('#entry-form');
 const $photoUrl = document.querySelector('#photoUrl');
 const $entriesView = document.querySelector('.entries-wrap');
 const $previewImg = document.querySelector('#placeholder-img');
+const $titleInput = document.querySelector('#title');
+const $notesInput = document.querySelector('#notes');
+const $mainHeading = document.querySelector('#new-entry');
+const $titleForm = document.querySelector('#new-entry');
 const $journalEntry = document.querySelector('#journal-entry');
 const $navItem = document.querySelector('.nav-item');
 const $newEntryButton = document.querySelector('.new-entry-button');
@@ -14,6 +18,10 @@ if (!$journalEntry) throw new Error('$journalEntry did not query!');
 if (!$entriesView) throw new Error('$entriesView did not query!');
 if (!$navItem) throw new Error('$navItem did not query!');
 if (!$newEntryButton) throw new Error('$newEntryButton did not query!');
+if (!$titleInput) throw new Error('$titleInput did not query!');
+if (!$notesInput) throw new Error('$notesInput did not query!');
+if (!$mainHeading) throw new Error('$mainHeading did not query!');
+if (!$titleForm) throw new Error('$titleForm did not query!');
 // set the src attribute of the photo from user input
 $photoUrl.addEventListener('input', (event) => {
   const url = event.target;
@@ -31,17 +39,37 @@ $entryForm.addEventListener('submit', (event) => {
     // Assign property to new Object taken from nextEntryId
     entryId: data.nextEntryId,
   };
-  // next entry will receive a different entryId.
-  data.nextEntryId++;
-  // adds to the beginning of entries array
-  data.entries.unshift(entryData);
+  if (data.editing) {
+    //  assign the entry id value from data.editing to the new object with the updated form values.
+    entryData.entryId = data.editing.entryId;
+    //  find the index located in the array
+    const index = data.entries.findIndex(
+      (entry) => entry.entryId === data.editing?.entryId,
+    );
+    // replace the original object for the edited entry
+    data.entries[index] = entryData;
+    // render new DOM Tree and replace original 'li' with the updated
+    const $oldListItem = $journalEntry.querySelector(
+      `[data-entry-id='${data.editing.entryId}']`,
+    );
+    if (!$oldListItem) throw new Error('$oldListItem did not query!');
+    // replaces old li with newly rendered
+    $oldListItem.replaceWith(renderEntry(entryData));
+    //  update the title on the form to New Entry.
+    //  reset data.editing to null.
+    data.editing = null;
+    $titleForm.textContent = 'New Entry';
+  } else {
+    // next entry will receive a different entryId.
+    data.nextEntryId++;
+    // adds to the beginning of entries array
+    data.entries.unshift(entryData);
+    // Add new entry to the DOM
+    $journalEntry.prepend(renderEntry(entryData));
+  }
   writeData();
   toggleNoEntries();
   viewSwap('entries');
-  // Add new entry to the DOM
-  $journalEntry.prepend(renderEntry(entryData));
-  // reset preview img
-  $previewImg.src = placeholderImg;
   resetForm(); // reset form
 });
 function renderEntry(entry) {
@@ -52,15 +80,22 @@ function renderEntry(entry) {
   const $img = document.createElement('img');
   const $entryTitle = document.createElement('h2');
   const $description = document.createElement('p');
+  // pencil icon
+  const $pencilIcon = document.createElement('i');
   $row.setAttribute('class', 'row');
   $columnImg.setAttribute('class', 'column-half');
   $columnText.setAttribute('class', 'column-half');
   $entryTitle.setAttribute('class', 'header-font');
+  // pencil attribute
+  $pencilIcon.setAttribute('class', 'fa-solid fa-pencil');
+  // li that stores the entryId of the entry being rendered
+  $li.setAttribute('data-entry-id', entry.entryId.toString());
   // entry data
   $img.src = entry.photoUrl;
   $img.alt = entry.title;
   $entryTitle.textContent = entry.title;
   $description.textContent = entry.notes;
+  $entryTitle.appendChild($pencilIcon);
   $columnImg.appendChild($img);
   $columnText.append($entryTitle, $description);
   $row.append($columnImg, $columnText);
@@ -87,10 +122,37 @@ $navItem.addEventListener('click', (event) => {
 // when clicking on new, swaps to entry form
 $newEntryButton.addEventListener('click', (event) => {
   const $viewName = event.target.dataset.view;
+  $titleForm.textContent = 'New Entry';
   if ($viewName === 'entries' || $viewName === 'entry-form') {
     resetForm();
     viewSwap($viewName);
   }
+});
+// when the pencil icon is clicked
+$journalEntry.addEventListener('click', (event) => {
+  const $icon = event.target;
+  // if not found, return
+  if (!$icon.classList.contains('fa-pencil')) return;
+  // get the li closes and store the value
+  const $parent = $icon.closest('li');
+  if (!$parent) throw new Error('$entryForm closest() failed!');
+  const $entryId = $parent.getAttribute('data-entry-id');
+  if (!$entryId) throw new Error('$entryForm getAttribute() failed!');
+  // search for and store that obj using the entryId to verify
+  const entry = data.entries.find(
+    (entry) => entry.entryId.toString() === $entryId,
+  );
+  if (!entry) throw new Error('data.entries find() failed!');
+  // if found, assign entry to data.editing
+  data.editing = entry;
+  // pre-populate form with entry's values
+  $previewImg.src = entry.photoUrl;
+  $photoUrl.value = entry.photoUrl;
+  $titleInput.value = entry.title;
+  $notesInput.value = entry.notes;
+  // change title
+  $titleForm.textContent = 'Edit Entry';
+  viewSwap('entry-form');
 });
 // toggles the no entries text to show or hide when the function is called
 const toggleNoEntries = () => {
@@ -111,5 +173,6 @@ const viewSwap = (viewName) => {
 };
 // Reset form
 const resetForm = () => {
+  $previewImg.src = placeholderImg;
   $entryForm.reset();
 };
