@@ -68,8 +68,13 @@ textarea {
 
 .button-container {
   display: flex;
-  justify-content: end;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   margin-bottom: 15px;
+}
+
+#delete-entry-button {
+  background-color: red;
 }
 
 .custom-button {
