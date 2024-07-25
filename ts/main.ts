@@ -198,6 +198,9 @@ $journalEntry.addEventListener('click', (event: Event) => {
   // change title
   $titleForm.textContent = 'Edit Entry';
 
+  // display delete button
+  toggleDeleteButton(true);
+
   viewSwap('entry-form');
 });
 
@@ -222,8 +225,18 @@ const viewSwap = (viewName: 'entries' | 'entry-form'): void => {
   data.view = viewName;
 };
 
+// delete function
+const toggleDeleteButton = (view: boolean): void => {
+  const $deleteButton = document.querySelector('#delete-entry-button');
+  if (!$deleteButton) throw new Error('$deleteButton did not query!');
+
+  if (view) $deleteButton.classList.remove('hidden');
+  else $deleteButton.classList.add('hidden');
+};
+
 // Reset form
 const resetForm = (): void => {
   $previewImg.src = placeholderImg;
   $entryForm.reset();
+  toggleDeleteButton(false);
 };
