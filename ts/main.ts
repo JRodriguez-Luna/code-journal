@@ -25,6 +25,11 @@ const $titleForm = document.querySelector('#new-entry');
 const $journalEntry = document.querySelector('#journal-entry');
 const $navItem = document.querySelector('.nav-item');
 const $newEntryButton = document.querySelector('.new-entry-button');
+// Modal pop-up
+const $deleteButton = document.querySelector('#delete-entry-button');
+const $confirmModal = document.querySelector('dialog');
+const $confirmDelete = document.querySelector('#confirm-delete');
+const $cancelDelete = document.querySelector('#cancel-delete');
 const placeholderImg = $previewImg.src;
 
 if (!$entryForm) throw new Error('$entryForm did not query!');
@@ -38,6 +43,8 @@ if (!$titleInput) throw new Error('$titleInput did not query!');
 if (!$notesInput) throw new Error('$notesInput did not query!');
 if (!$mainHeading) throw new Error('$mainHeading did not query!');
 if (!$titleForm) throw new Error('$titleForm did not query!');
+if (!$deleteButton) throw new Error('$deleteButton did not query!');
+if (!$confirmModal) throw new Error('$confirmModal did not query!');
 
 // set the src attribute of the photo from user input
 $photoUrl.addEventListener('input', (event: Event) => {
@@ -165,6 +172,19 @@ $newEntryButton.addEventListener('click', (event: Event) => {
     viewSwap($viewName);
   }
 });
+
+
+
+// when selecting 'delete entry', pop-up confirmation
+$deleteButton.addEventListener('click', () => {
+  $confirmModal.showModal();
+});
+
+// if user cancels the delete, hide modal
+$cancelDelete?.addEventListener('click', () => {
+  $confirmModal.close();
+});
+
 
 // when the pencil icon is clicked
 $journalEntry.addEventListener('click', (event: Event) => {

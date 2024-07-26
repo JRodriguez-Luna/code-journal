@@ -95,3 +95,18 @@ textarea {
 .new-entry-button {
   text-decoration: none;
 }
+
+/* Confirmation Modal */
+.confirm-modal-container {
+  border-color: transparent;
+}
+
+.confirm-modal-container::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 1rem;
+}
