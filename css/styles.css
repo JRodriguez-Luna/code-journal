@@ -74,7 +74,11 @@ textarea {
 }
 
 #delete-entry-button {
-  background-color: red;
+  padding: 0 10px;
+  color: red;
+  text-decoration: underline;
+  border-radius: 0;
+  background-color: transparent;
 }
 
 .custom-button {
@@ -107,6 +111,15 @@ textarea {
 
 .modal-actions {
   display: flex;
-  justify-content: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   margin: 2rem 0 1rem;
+}
+
+#confirm-delete {
+  background-color: red;
+}
+
+#cancel-delete {
+  background-color: lightgray;
 }

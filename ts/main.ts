@@ -173,8 +173,6 @@ $newEntryButton.addEventListener('click', (event: Event) => {
   }
 });
 
-
-
 // when selecting 'delete entry', pop-up confirmation
 $deleteButton.addEventListener('click', () => {
   $confirmModal.showModal();
@@ -185,6 +183,33 @@ $cancelDelete?.addEventListener('click', () => {
   $confirmModal.close();
 });
 
+// if user confirms deletion, delete that entry
+$confirmDelete?.addEventListener('click', () => {
+  // find the entryId located in the entries array
+  const index = data.entries.findIndex(
+    (entry) => entry.entryId === data.editing?.entryId,
+  );
+
+  // delete entry off the array
+  data.entries.splice(index, 1);
+
+  // delete off the DOM tree
+  const $itemToDelete = document.querySelector(
+    `[data-entry-id='${data.editing?.entryId}']`,
+  );
+  if (!$itemToDelete) throw new Error('$itemToDelete did not query!');
+
+  // Remove from  DOM tree and update
+  $journalEntry.removeChild($itemToDelete);
+
+  // revert back to null
+  data.editing = null;
+
+  writeData();
+  toggleNoEntries();
+  $confirmModal.close();
+  viewSwap('entries');
+});
 
 // when the pencil icon is clicked
 $journalEntry.addEventListener('click', (event: Event) => {
