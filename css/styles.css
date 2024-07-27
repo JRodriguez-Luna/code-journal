@@ -68,8 +68,17 @@ textarea {
 
 .button-container {
   display: flex;
-  justify-content: end;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   margin-bottom: 15px;
+}
+
+#delete-entry-button {
+  padding: 0 10px;
+  color: red;
+  text-decoration: underline;
+  border-radius: 0;
+  background-color: transparent;
 }
 
 .custom-button {
@@ -89,4 +98,28 @@ textarea {
 
 .new-entry-button {
   text-decoration: none;
+}
+
+/* Confirmation Modal */
+.confirm-modal-container {
+  border-color: transparent;
+}
+
+.confirm-modal-container::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 2rem 0 1rem;
+}
+
+#confirm-delete {
+  background-color: red;
+}
+
+#cancel-delete {
+  background-color: lightgray;
 }
